@@ -142,7 +142,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
     if (unlock_indicator) {
         cairo_scale(ctx, scaling_factor(), scaling_factor());
         /* Draw a (centered) circle with transparent background. */
-        cairo_set_line_width(ctx, 3.0);
+        cairo_set_line_width(ctx, 2.0);
         cairo_arc(ctx,
                   BUTTON_CENTER /* x */,
                   BUTTON_CENTER /* y */,
@@ -202,6 +202,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
         /* Color text, same as border */
         get_color();
 
+        cairo_select_font_face(ctx, "Concourse T3", 0, 0);
         cairo_set_font_size(ctx, 32.0);
 
         cairo_text_extents_t time_extents;
@@ -222,7 +223,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
          * keypress. */
         if (unlock_state == STATE_KEY_ACTIVE ||
             unlock_state == STATE_BACKSPACE_ACTIVE) {
-            cairo_set_line_width(ctx, 4);
+            cairo_set_line_width(ctx, 3);
             cairo_new_sub_path(ctx);
             double highlight_start = (rand() % (int)(2 * M_PI * 100)) / 100.0;
             cairo_arc(ctx,
@@ -237,7 +238,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
             /* Draw two little separators for the highlighted part of the
             * unlock indicator. */
             cairo_set_operator(ctx,CAIRO_OPERATOR_OVER); /* back to normal operator */
-            cairo_set_line_width(ctx, 10);
+            cairo_set_line_width(ctx, 7);
 
             /* Change color of separators based on backspace/active keypress */
             get_color();
